@@ -233,6 +233,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91eadec1a73263a4ca9549a88f57d0af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canPrintOne: 0
+  canPrintTwo: 0
+  functionTwoString: the cake is a lie
+  canPrintThree: 1
+  words:
+  - the
+  - cake
+  - is
+  - a
+  - lie
 --- !u!4 &1346725942
 Transform:
   m_ObjectHideFlags: 0
