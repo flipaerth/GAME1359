@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
+
+    [SerializeField, Header("Player Parameters")]
+
     // Public Variable for movement speed - adjusted in editor - set to 1 by default
     public float playerSpeed = 1;
 
@@ -20,9 +23,16 @@ public class PlayerMovement : MonoBehaviour
          Input Variables
          */
 
-        // Horizontal Axis
+        /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+         * Gets Unity's left and right input/horizontal input and saves into a float.  *
+         * Axis gets left & right, -1 is left, 1 is right, 0 is nothing                *
+         * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
         float h = Input.GetAxis("Horizontal");
-        // Vertical Axis
+
+        /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+         * Gets Unity's up and down input/vertical input and saves into a float.       *
+         * Axis gets up & down, -1 is down, 1 is up, 0 is nothing                      *
+         * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
         float v = Input.GetAxis("Vertical");
 
         /*
