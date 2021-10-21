@@ -5,33 +5,33 @@ Your assignment for this week and next week is to build from scratch a simple Fi
 where the goal will be to shoot several different moving targets in a level. Your game will need to include
 specific features listed below, which are broken down into several categories:
 
-[PLAYER]
+[PLAYER] {DONE}
 Your player should be controlled with WASD to strafe forward/back/left/right, and Spacebar to jump.
 You should be able to look/aim with the mouse. Pressing the left mouse button should allow you to
 shoot as long as you have ammo. Shooting should of course deplete the player's ammo.
 The player should also have a variable to keep track of health.
 
-[TARGETS]
+[TARGETS] {DONE}
 Your scene/level should include at least 3 different moving targets for the player to shoot.
 When shot, the targets should be destroyed. Once all the targets have been destroyed, the player has completed the level.
 
 At least one of these targets should use animation to move, and at least one should use lerping/nodes.
 Both of these are demonstrated in this week's videos!
 
-[PICKUPS]
+[PICKUPS] {DONE}
 Include at least 1 instance of a pickup that refills the player's ammo somewhere in the level.
 
-[HAZARDS]
+[HAZARDS] {DONE}
 Include at least 3 instances of an object in the level that will damage the player if
 they are hit (make sure these are distinct from the targets and pickups).
 You also need to include a Kill Zone/Line in case the player goes out of bounds
 
-[LEVELS]
+[LEVELS] {DONE}
 Include at least 3 scenes - a title screen/main menu, at least one level that demonstrates
 the features of this assignment, and a game over/death scene for when the player dies or is victorious.
 You may add additional levels/scenes if you'd like.
 
-[UI]
+[UI] {DONE}
 The player's health and ammo should be visible to them, either with a bar or simply onscreen text.
 The aforementioned title screen should include buttons to start the game and end the game, and
 the game over scene should allow players to return to the title screen.
