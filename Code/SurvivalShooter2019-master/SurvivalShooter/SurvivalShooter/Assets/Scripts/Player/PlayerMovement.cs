@@ -2,13 +2,19 @@
 
 public class PlayerMovement : MonoBehaviour
 {
+	// Player Movement Speed
 	public float speed = 6f;
-
+	// Reference to the Vector3
 	private Vector3 movement;
+	// Reference to Animator Component
 	private Animator anim;
+	// Reference to the Rigidbody
 	private Rigidbody playerRigidbody;
+	// Reference for the mask
 	private int floorMask;
+	// Length from the camera into the world
 	private float camRayLength = 100f;
+
 
 	void Awake()
 	{
