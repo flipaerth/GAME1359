@@ -15,6 +15,8 @@ public class PlayerMovement : MonoBehaviour
 	// Length from the camera into the world
 	private float camRayLength = 100f;
 
+	[SerializeField, Header("Player Index")]
+	int playerIndex = 1;
 
 	void Awake()
 	{
@@ -25,12 +27,32 @@ public class PlayerMovement : MonoBehaviour
 
 	void FixedUpdate()
 	{
-		float h = Input.GetAxisRaw("Horizontal");
-		float v = Input.GetAxisRaw("Vertical");
+		float h = Input.GetAxisRaw("Horizontal" + playerIndex);
+		float v = Input.GetAxisRaw("Vertical" + playerIndex);
 
 		Move(h, v);
-		Turning();
 		Animating(h, v);
+		if (SplitScreen.splitScreenBool == false)
+		{
+			Turning();
+		}
+		else if (SplitScreen.splitScreenBool == true)
+        {
+			float distanceToClosestEnemy = Mathf.Infinity;
+			Enemy closestEnemy = null;
+			Enemy[] allEnemies = GameObject.FindObjectsOfType<Enemy>();
+
+			foreach (Enemy currentEnemy in allEnemies)
+			{
+				float distanceToEnemy = (currentEnemy.transform.position - this.transform.position).sqrMagnitude;
+				if (distanceToEnemy < distanceToClosestEnemy)
+				{
+					distanceToClosestEnemy = distanceToEnemy;
+					closestEnemy = currentEnemy;
+				}
+			}
+			transform.LookAt(closestEnemy.transform.position + Vector3.up * 1);
+		}
 	}
 
 	void Move(float h, float v)

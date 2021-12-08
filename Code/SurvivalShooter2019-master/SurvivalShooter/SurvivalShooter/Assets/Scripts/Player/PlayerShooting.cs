@@ -17,6 +17,17 @@ public class PlayerShooting : MonoBehaviour
     Light gunLight;
     float effectsDisplayTime = 0.2f;
 
+    [SerializeField, Header("Player Index")]
+    int playerIndex = 1;
+
+    [SerializeField, Header("Zombunny")]
+    GameObject enemyOne;
+
+    [SerializeField, Header("ZomBear")]
+    GameObject enemyTwo;
+
+    [SerializeField, Header("Hellephant")]
+    GameObject enemyThree;
 
     void Awake ()
     {
@@ -30,14 +41,32 @@ public class PlayerShooting : MonoBehaviour
 
     void Update ()
     {
+
         timer += Time.deltaTime;
 
-		if(Input.GetButton ("Fire1") && timer >= timeBetweenBullets && Time.timeScale != 0)
+        if (SplitScreen.splitScreenBool == false)
         {
-            Shoot ();
+            if (Input.GetButton("Fire1") && timer >= timeBetweenBullets && Time.timeScale != 0 && playerIndex == 1)
+            {
+                Shoot();
+            }
+        } else if (SplitScreen.splitScreenBool == true)
+        {
+            // Function to find the closest enemy
+            findClosestEnemy();
+            range = 50f;
+            if (Input.GetButton("Fire1") && timer >= timeBetweenBullets && Time.timeScale != 0 && playerIndex == 1)
+            {
+                Shoot();
+            }
+
+            if (Input.GetButton("Fire2") && timer >= timeBetweenBullets && Time.timeScale != 0 && playerIndex == 2)
+            {
+                Shoot();
+            }
         }
 
-        if(timer >= timeBetweenBullets * effectsDisplayTime)
+        if (timer >= timeBetweenBullets * effectsDisplayTime)
         {
             DisableEffects ();
         }
@@ -49,7 +78,6 @@ public class PlayerShooting : MonoBehaviour
         gunLine.enabled = false;
         gunLight.enabled = false;
     }
-
 
     void Shoot ()
     {
@@ -81,5 +109,25 @@ public class PlayerShooting : MonoBehaviour
         {
             gunLine.SetPosition (1, shootRay.origin + shootRay.direction * range);
         }
+    }
+
+    public void findClosestEnemy()
+    {
+        float distanceToClosestEnemy = Mathf.Infinity;
+        Enemy closestEnemy = null;
+        Enemy[] allEnemies = GameObject.FindObjectsOfType<Enemy>();
+
+        foreach (Enemy currentEnemy in allEnemies)
+        {
+            float distanceToEnemy = (currentEnemy.transform.position - this.transform.position).sqrMagnitude;
+            if (distanceToEnemy < distanceToClosestEnemy)
+            {
+                distanceToClosestEnemy = distanceToEnemy;
+                closestEnemy = currentEnemy;
+            }
+        }
+
+        transform.LookAt(closestEnemy.transform.position + Vector3.up * 1);
+        Debug.DrawLine(this.transform.position, closestEnemy.transform.position);
     }
 }

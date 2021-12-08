@@ -3,7 +3,8 @@ using System.Collections;
 
 public class EnemyMovement : MonoBehaviour
 {
-    Transform player;
+    Transform playerOne;
+    Transform playerTwo;
     PlayerHealth playerHealth;
     EnemyHealth enemyHealth;
     UnityEngine.AI.NavMeshAgent nav;
@@ -11,8 +12,8 @@ public class EnemyMovement : MonoBehaviour
 
     void Awake ()
     {
-        player = GameObject.FindGameObjectWithTag ("Player").transform;
-        playerHealth = player.GetComponent <PlayerHealth> ();
+        playerOne = GameObject.FindGameObjectWithTag("PlayerOne").transform;
+        playerHealth = playerOne.GetComponent<PlayerHealth>();
         enemyHealth = GetComponent <EnemyHealth> ();
         nav = GetComponent <UnityEngine.AI.NavMeshAgent> ();
     }
@@ -20,13 +21,44 @@ public class EnemyMovement : MonoBehaviour
 
     void Update ()
     {
-        if(enemyHealth.currentHealth > 0 && playerHealth.currentHealth > 0)
+        if (SplitScreen.splitScreenBool == false)
         {
-            nav.SetDestination (player.position);
-        }
-        else
+            if (enemyHealth.currentHealth > 0 && playerHealth.currentHealth > 0)
+            {
+                nav.SetDestination(playerOne.position);
+            }
+            else
+            {
+                nav.enabled = false;
+            }
+        } else if(SplitScreen.splitScreenBool == true)
         {
-            nav.enabled = false;
+            playerTwo = GameObject.FindGameObjectWithTag("PlayerTwo").transform;
+
+            float distanceToClosestPlayer = Mathf.Infinity;
+            Player closestPlayer = null;
+            Player[] allPlayers = GameObject.FindObjectsOfType<Player>();
+
+            foreach (Player currentPlayer in allPlayers)
+            {
+                float distanceToPlayer = (currentPlayer.transform.position - this.transform.position).sqrMagnitude;
+                if (distanceToPlayer < distanceToClosestPlayer)
+                {
+                    distanceToClosestPlayer = distanceToPlayer;
+                    closestPlayer = currentPlayer;
+                }
+            }
+
+            Debug.DrawLine(this.transform.position, closestPlayer.transform.position);
+
+            if (enemyHealth.currentHealth > 0 && playerHealth.currentHealth > 0)
+            {
+                nav.SetDestination(closestPlayer.transform.position);
+            }
+            else
+            {
+                nav.enabled = false;
+            }
         }
     }
 }
