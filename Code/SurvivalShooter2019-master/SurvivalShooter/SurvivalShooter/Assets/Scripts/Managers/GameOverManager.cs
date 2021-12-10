@@ -3,7 +3,6 @@
 public class GameOverManager : MonoBehaviour
 {
     public PlayerHealth playerHealth;
-    public PlayerTwoHealth playerTwoHealth;
 	public float restartDelay = 5f;
 
 

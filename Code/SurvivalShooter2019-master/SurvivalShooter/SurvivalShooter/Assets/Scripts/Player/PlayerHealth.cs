@@ -14,6 +14,9 @@ public class PlayerHealth : MonoBehaviour
     public float flashSpeed = 5f;
     public Color flashColour = new Color(1f, 0f, 0f, 0.1f);
 
+    //[SerializeField, Header("Player Index")]
+    //int playerIndex = 1;
+
 
     Animator anim;
     AudioSource playerAudio;

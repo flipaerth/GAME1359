@@ -9,9 +9,9 @@ public class EnemyAttack : MonoBehaviour
 
     Animator anim;
     GameObject playerOne;
-    GameObject playerTwo;
+    //GameObject playerTwo;
     PlayerHealth playerHealth;
-    PlayerTwoHealth playerTwoHealth;
+    //PlayerTwoHealth playerTwoHealth;
     EnemyHealth enemyHealth;
     bool playerInRange;
     bool playerTwoInRange;
@@ -21,9 +21,9 @@ public class EnemyAttack : MonoBehaviour
     void Awake ()
     {
         playerOne = GameObject.FindGameObjectWithTag ("PlayerOne");
-        playerTwo = GameObject.FindGameObjectWithTag ("PlayerTwo");
+        //playerTwo = GameObject.FindGameObjectWithTag ("PlayerTwo");
         playerHealth = playerOne.GetComponent<PlayerHealth>();
-        playerTwoHealth = playerTwo.GetComponent<PlayerTwoHealth>();
+        //playerTwoHealth = playerTwo.GetComponent<PlayerTwoHealth>();
         enemyHealth = GetComponent<EnemyHealth>();
         anim = GetComponent <Animator> ();
     }
@@ -35,10 +35,6 @@ public class EnemyAttack : MonoBehaviour
         {
             playerInRange = true;
         }
-        if (other.gameObject == playerTwo)
-        {
-            playerTwoInRange = true;
-        }
     }
 
 
@@ -47,10 +43,6 @@ public class EnemyAttack : MonoBehaviour
         if(other.gameObject == playerOne)
         {
             playerInRange = false;
-        } 
-        if (other.gameObject == playerTwo)
-        {
-            playerTwoInRange = false;
         }
     }
 
@@ -68,16 +60,6 @@ public class EnemyAttack : MonoBehaviour
         {
             anim.SetTrigger ("PlayerDead");
         }
-
-        if (timer >= timeBetweenAttacks && playerTwoInRange && enemyHealth.currentHealth > 0)
-        {
-            Attack();
-        }
-
-        if (playerTwoHealth.currentHealth <= 0)
-        {
-            anim.SetTrigger("PlayerDead");
-        }
     }
 
 
@@ -88,10 +70,6 @@ public class EnemyAttack : MonoBehaviour
         if(playerHealth.currentHealth > 0)
         {
             playerHealth.TakeDamage (attackDamage);
-        }
-        if (playerTwoHealth.currentHealth > 0)
-        {
-            playerTwoHealth.TakeDamage(attackDamage);
         }
     }
 }

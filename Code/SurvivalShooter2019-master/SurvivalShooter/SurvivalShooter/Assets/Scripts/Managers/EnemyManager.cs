@@ -17,7 +17,7 @@ public class EnemyManager : MonoBehaviour
 
     void Spawn ()
     {
-        if(playerOneHealth.currentHealth <= 0f && playerTwoHealth.currentHealth <= 0f)
+        if(playerOneHealth.currentHealth <= 0f)
         {
             return;
         }

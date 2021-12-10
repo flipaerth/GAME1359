@@ -16,6 +16,7 @@ public class SplitScreen : MonoBehaviour
     public Transform playerTwoCamera;
 
     public static bool splitScreenBool = false;
+    public PlayerHealth playerHealth;
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +34,10 @@ public class SplitScreen : MonoBehaviour
             Instantiate(playerTwo, new Vector3(4, 0, 0), Quaternion.identity);
             cam1.rect = new Rect(0, 0.5f, 1, 0.5f);
             cam2.rect = new Rect(0, 0, 1, 0.5f);
+        }
+        if (playerHealth.currentHealth <= 0)
+        {
+            splitScreenBool = false;
         }
     }
 }
