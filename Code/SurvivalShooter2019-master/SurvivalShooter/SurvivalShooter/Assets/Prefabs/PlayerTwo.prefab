@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 2969137901314657797}
   - component: {fileID: 3023136513134582815}
   - component: {fileID: 3677261203004028802}
-  - component: {fileID: -3354343800427370696}
+  - component: {fileID: -2813811081956045557}
   - component: {fileID: 8462382611826363815}
   - component: {fileID: 3532548427965036262}
   m_Layer: 0
@@ -166,7 +166,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2887137950874065565}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 9922a12f34d0a084aab32de985459723, type: 3}
@@ -283,7 +283,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 6
   playerIndex: 2
---- !u!114 &-3354343800427370696
+--- !u!114 &-2813811081956045557
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -292,14 +292,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 2887137950874065565}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 544f2064df03e95419b4a5147c506b08, type: 3}
+  m_Script: {fileID: 11500000, guid: 11c9e45a09bbd0646bdfe9ba0c6c34cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   startingHealth: 100
   currentHealth: 100
-  healthSlider: {fileID: 0}
-  damageImage: {fileID: 0}
-  deathClip: {fileID: 0}
+  healthSliderTwo: {fileID: 9121500191595573116, guid: 4293f10e12840bc49b0217000377e089,
+    type: 3}
+  damageImage: {fileID: 1581423184110104232, guid: fa336b3085a3b0946b4aedec7e36090e,
+    type: 3}
+  deathClip: {fileID: 8300000, guid: d36a393bca4582043982db9089e1694f, type: 3}
   flashSpeed: 5
   flashColour: {r: 1, g: 0, b: 0, a: 0.1}
 --- !u!114 &8462382611826363815

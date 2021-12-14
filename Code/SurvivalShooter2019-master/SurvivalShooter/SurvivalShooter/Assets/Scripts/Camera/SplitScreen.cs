@@ -16,7 +16,10 @@ public class SplitScreen : MonoBehaviour
     public Transform playerTwoCamera;
 
     public static bool splitScreenBool = false;
+
     public PlayerHealth playerHealth;
+
+    public static SplitScreen instance;
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +30,7 @@ public class SplitScreen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("space"))
+        if (Input.GetKeyDown("space") && splitScreenBool == false)
         {
             splitScreenBool = true;
             Instantiate(playerTwoCamera, new Vector3(5, 15, -22), Quaternion.Euler(30f, 0, 0));

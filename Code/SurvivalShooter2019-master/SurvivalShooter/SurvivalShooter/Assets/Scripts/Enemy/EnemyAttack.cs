@@ -9,40 +9,66 @@ public class EnemyAttack : MonoBehaviour
 
     Animator anim;
     GameObject playerOne;
-    //GameObject playerTwo;
+    GameObject playerTwo;
     PlayerHealth playerHealth;
-    //PlayerTwoHealth playerTwoHealth;
+    PlayerTwoHealth playerTwoHealth;
     EnemyHealth enemyHealth;
     bool playerInRange;
     bool playerTwoInRange;
     float timer;
 
-
     void Awake ()
     {
-        playerOne = GameObject.FindGameObjectWithTag ("PlayerOne");
-        //playerTwo = GameObject.FindGameObjectWithTag ("PlayerTwo");
+        playerOne = GameObject.FindGameObjectWithTag("PlayerOne");
+        playerTwo = GameObject.FindGameObjectWithTag("PlayerTwo");
         playerHealth = playerOne.GetComponent<PlayerHealth>();
-        //playerTwoHealth = playerTwo.GetComponent<PlayerTwoHealth>();
+        playerTwoHealth = playerTwo.GetComponent<PlayerTwoHealth>();
         enemyHealth = GetComponent<EnemyHealth>();
         anim = GetComponent <Animator> ();
     }
 
-
     void OnTriggerEnter (Collider other)
     {
-        if(other.gameObject == playerOne)
+        if (SplitScreen.splitScreenBool == false)
         {
-            playerInRange = true;
+            if (other.gameObject == playerOne)
+            {
+                playerInRange = true;
+            }
+        }
+        else if (SplitScreen.splitScreenBool == true)
+        {
+            if (other.gameObject == playerOne)
+            {
+                playerInRange = true;
+            }
+            if (other.gameObject == playerTwo)
+            {
+                playerTwoInRange = true;
+            }
         }
     }
 
 
     void OnTriggerExit (Collider other)
     {
-        if(other.gameObject == playerOne)
+        if (SplitScreen.splitScreenBool == false)
         {
-            playerInRange = false;
+            if (other.gameObject == playerOne)
+            {
+                playerInRange = false;
+            }
+        }
+        else if (SplitScreen.splitScreenBool == true)
+        {
+            if (other.gameObject == playerOne)
+            {
+                playerInRange = false;
+            }
+            if (other.gameObject == playerTwo)
+            {
+                playerTwoInRange = false;
+            }
         }
     }
 
@@ -51,14 +77,34 @@ public class EnemyAttack : MonoBehaviour
     {
         timer += Time.deltaTime;
 
-        if(timer >= timeBetweenAttacks && playerInRange && enemyHealth.currentHealth > 0)
+        if (SplitScreen.splitScreenBool == false)
         {
-            Attack ();
-        }
-
-        if(playerHealth.currentHealth <= 0)
+            if (timer >= timeBetweenAttacks && playerInRange && enemyHealth.currentHealth > 0)
+            {
+                Attack();
+            }
+            if (playerHealth.currentHealth <= 0)
+            {
+                anim.SetTrigger("PlayerDead");
+            }
+        } else if (SplitScreen.splitScreenBool == true)
         {
-            anim.SetTrigger ("PlayerDead");
+            if (timer >= timeBetweenAttacks && playerInRange && enemyHealth.currentHealth > 0)
+            {
+                Attack();
+            }
+            if (timer >= timeBetweenAttacks && playerTwoInRange && enemyHealth.currentHealth > 0)
+            {
+                AttackTwo();
+            }
+            if (playerHealth.currentHealth <= 0)
+            {
+                anim.SetTrigger("PlayerDead");
+            }
+            if (playerTwoHealth.currentHealth <= 0)
+            {
+                anim.SetTrigger("PlayerDead");
+            }
         }
     }
 
@@ -70,6 +116,16 @@ public class EnemyAttack : MonoBehaviour
         if(playerHealth.currentHealth > 0)
         {
             playerHealth.TakeDamage (attackDamage);
+        }
+    }
+
+    void AttackTwo()
+    {
+        timer = 0f;
+
+        if (playerTwoHealth.currentHealth > 0)
+        {
+            playerTwoHealth.TakeDamage(attackDamage);
         }
     }
 }

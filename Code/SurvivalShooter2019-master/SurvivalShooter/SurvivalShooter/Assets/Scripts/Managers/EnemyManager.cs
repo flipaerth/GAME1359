@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 public class EnemyManager : MonoBehaviour
 {
-    public PlayerHealth playerOneHealth;
-    public PlayerHealth playerTwoHealth;
+    public PlayerHealth playerHealth;
+    public PlayerTwoHealth playerTwoHealth;
     public GameObject enemy;
     public float spawnTime = 3f;
     public Transform[] spawnPoints;
-
 
     void Start ()
     {
@@ -17,7 +18,7 @@ public class EnemyManager : MonoBehaviour
 
     void Spawn ()
     {
-        if(playerOneHealth.currentHealth <= 0f)
+        if(playerHealth.currentHealth <= 0f || playerTwoHealth.currentHealth <= 0f)
         {
             return;
         }
